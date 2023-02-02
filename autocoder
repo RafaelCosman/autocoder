@@ -84,6 +84,11 @@ Code to please write me a command line tool called autocoder:
 
 print("Welcome to autocoder!")
 
+Code to go ahead and run the webserver:
+```console
+python3 webserver.py
+```
+
 
 ================
 Actual Prompt
@@ -101,11 +106,19 @@ print(completion)
 
 # Get the file name
 filename = completion.split('\n')[0]
-filename = filename[2:]
 
-# Get the contents
-contents = completion[completion.find('\n')+1:]
+if filename == "```console": # This is if it is a console command rather than a file
+    commands_to_run = completion.splitlines()[1:-1]
+    commands_to_run_as_string = "\n".join(commands_to_run)
+    input(f"autocoder would like to run the following commands. Press enter to continue. (to cancel, press control-c)\n\n{commands_to_run_as_string}")
+    for command in commands_to_run:
+        os.system(command)
+else: # If it is an actual file
+    filename = filename[2:]
 
-# Write the file
-with open(filename, 'w') as f:
-    f.write(contents)
+    # Get the contents
+    contents = completion[completion.find('\n')+1:]
+
+    # Write the file
+    with open(filename, 'w') as f:
+        f.write(contents)
