@@ -5,11 +5,8 @@ from prompts import prompt
 from llm_interface import complete
 from completion_handling import handle_completion_as_file_or_command
 
-# Now we actually run stuff:
 input_from_user = sys.argv[1]
-print(prompt(input_from_user))
 
 completion = complete(prompt(input_from_user)).strip()
-print(completion)
 
 handle_completion_as_file_or_command(completion)
