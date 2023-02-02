@@ -88,6 +88,17 @@ Python code to {input_from_user}:
 
 print(prompt)
 
-completion = complete(prompt)
+completion = complete(prompt).strip()
 
 print(completion)
+
+# Get the file name
+filename = completion.split('\n')[0]
+filename = filename[2:]
+
+# Get the contents
+contents = completion[completion.find('\n')+1:]
+
+# Write the file
+with open(filename, 'w') as f:
+    f.write(contents)
