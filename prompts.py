@@ -98,7 +98,8 @@ Make sure to write safe, readable, and commented code in an appropriate language
 Actual Prompt
 ================
 
-Code to {goal}:"""
+Code to {goal}:
+"""
 
 def debugging_prompt(command, error_message):
     return f"""You are an experienced programmer that can write safe, readable, and commented code in a variety of languages.
@@ -120,4 +121,4 @@ Actual Prompt
 ================
 
 Code to debug the error message:
-    """
+"""
