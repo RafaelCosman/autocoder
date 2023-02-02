@@ -110,7 +110,7 @@ filename = completion.split('\n')[0]
 if filename == "```console": # This is if it is a console command rather than a file
     commands_to_run = completion.splitlines()[1:-1]
     commands_to_run_as_string = "\n".join(commands_to_run)
-    input(f"autocoder would like to run the following commands. Press enter to continue. (to cancel, press control-c)\n\n{commands_to_run_as_string}")
+    input(f"autocoder would like to run the following commands. Press enter to continue. (to cancel, press control-c)\n\n\033[0;33m{commands_to_run_as_string}\033[0m")
     for command in commands_to_run:
         os.system(command)
 else: # If it is an actual file
