@@ -13,7 +13,6 @@ def complete(prompt):
         prompt=prompt,
         max_tokens=MAX_TOKENS,
         temperature=TEMPERATURE,
-        stop=['================'],
         stream=False,
     )
 
@@ -52,6 +51,7 @@ You are working in a directory with the following contents:
 Your goal now is to {input_from_user}.
 Make sure to write safe, readable, and commented code in an appropriate language based on the goal.
 
+
 ================
 EXAMPLES
 ================
@@ -77,6 +77,13 @@ Code to please comment example.py:
 if __name__ == "__main__": # Checks to see if the program is being run directly
     for i in range(10):
         print("Hello World!") # Prints "Hello World!" each time the loop is executed
+
+Code to please write me a command line tool called autocoder:
+# autocoder
+#!/usr/bin/env python3
+
+print("Welcome to autocoder!")
+
 
 ================
 Actual Prompt
