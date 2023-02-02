@@ -18,9 +18,9 @@ def handle_completion_as_file(completion):
     with open(filename, 'w') as f:
         f.write(contents)
 
-    print(f"""================
-{filename}
-================
+    print(f"""\033[90m================\033[0m
+\033[1m{filename}\033[0m
+\033[90m================\033[0m
 {contents}""")
 
 def handle_completion_as_command(completion):
@@ -42,7 +42,7 @@ def handle_completion_as_command(completion):
         errs = stderr.decode()
 
         if errs:
-            print(f"I got the following error:\n\n{errs} \nLet me see if I can debug it...")
+            print(f"I got the following error:\n\n\033[31m{errs}\033[0m\nLet me see if I can debug it...")
 
             # Make one attempt to debug the error
             completion = complete(debugging_prompt(command, errs)).strip()
@@ -61,7 +61,7 @@ def handle_completion_as_command(completion):
             errs = stderr.decode()
 
             if errs:
-                print(f"I still got an error:\n\n{errs}\n")
+                print(f"I still got an error:\n\n\033[31m{errs}\033[0m\n")
 
 def handle_completion_as_file_or_command(completion):
     if completion.split('\n')[0] == "```console":
