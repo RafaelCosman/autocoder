@@ -3,10 +3,11 @@
 import os
 import sys
 import openai
+import subprocess
 
 ENGINE = 'text-davinci-003'
 MAX_TOKENS = 1500
-TEMPERATURE = 0.3
+TEMPERATURE = 0.0
 def complete(prompt):
     completion = openai.Completion.create(
         engine=ENGINE,
@@ -112,7 +113,20 @@ if filename == "```console": # This is if it is a console command rather than a 
     commands_to_run_as_string = "\n".join(commands_to_run)
     input(f"autocoder would like to run the following commands. Press enter to continue. (to cancel, press control-c)\n\n\033[0;33m{commands_to_run_as_string}\033[0m")
     for command in commands_to_run:
-        os.system(command)
+        process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+
+        stdout, stderr = process.communicate()
+
+        print('STDOUT:')
+        print(stdout.decode())
+
+        print('STDERR:')
+        errs = stderr.decode()
+
+        if errs:
+            print(f"I got the following error:\n\n{errs} \nLet me see if I can debug it...")
+
+            # Make one attempt to debug the error
 else: # If it is an actual file
     filename = filename[2:]
 
