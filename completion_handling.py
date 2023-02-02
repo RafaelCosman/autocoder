@@ -18,6 +18,11 @@ def handle_completion_as_file(completion):
     with open(filename, 'w') as f:
         f.write(contents)
 
+    print(f"""================
+{filename}
+================
+{contents}""")
+
 def handle_completion_as_command(completion):
     # Get the file name
     first_line = completion.split('\n')[0]
@@ -43,6 +48,20 @@ def handle_completion_as_command(completion):
             completion = complete(debugging_prompt(command, errs)).strip()
 
             handle_completion_as_file(completion)
+
+            # Try running the command again
+            process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+
+            stdout, stderr = process.communicate()
+
+            print('STDOUT:')
+            print(stdout.decode())
+
+            print('STDERR:')
+            errs = stderr.decode()
+
+            if errs:
+                print(f"I still got an error:\n\n{errs}\n")
 
 def handle_completion_as_file_or_command(completion):
     if completion.split('\n')[0] == "```console":
