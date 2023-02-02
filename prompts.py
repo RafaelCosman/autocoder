@@ -60,15 +60,30 @@ if __name__ == "__main__": # Checks to see if the program is being run directly
         print("Hello World!") # Prints "Hello World!" each time the loop is executed
 
 Code to please write me a command line tool called autocoder:
+
 # autocoder
 #!/usr/bin/env python3
 
 print("Welcome to autocoder!")
 
 Code to go ahead and run the webserver:
+
 ```console
 python3 webserver.py
 ```
+
+Code to make me an example webpage:
+
+# index.html
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Example</title>
+    </head>
+    <body>
+        <p>This is an example of a simple HTML page with one paragraph.</p>
+    </body>
+</html>
 
 
 ================
