@@ -72,6 +72,12 @@ Code to go ahead and run the webserver:
 python3 webserver.py
 ```
 
+Code to remove the webserver file:
+
+```console
+rm webserver.py
+```
+
 Code to make me an example webpage:
 
 # index.html
