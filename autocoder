@@ -43,33 +43,33 @@ all_files_appended = get_all_files()
 
 input_from_user = sys.argv[1]
 
-prompt = f"""You are an experienced Python programmer.
+prompt = f"""You are an experienced programmer that can write safe, readable, and commented code in a variety of languages.
 
 You are working in a directory with the following contents:
 
 {all_files_appended}
 
 Your goal now is to {input_from_user}.
-Make sure to write safe, readable, and commented Python code
+Make sure to write safe, readable, and commented code in an appropriate language based on the goal.
 
 ================
 EXAMPLES
 ================
 
-Python code to write me a python file called example.py that prints out Hello World!:
+Code to write me a python file called example.py that prints out Hello World!:
 
 # example.py
 if __name__ == "__main__":
     print("Hello World!")
 
-Python code to Modify example.py to print it out 10 times:
+Code to Modify example.py to print it out 10 times:
 
 # example.py
 if __name__ == "__main__":
     for i in range(10):
         print("Hello World!")
 
-Python code to please comment example.py:
+Code to please comment example.py:
 
 # example.py
 # This file prints out "Hello World!" 10 times
@@ -82,7 +82,7 @@ if __name__ == "__main__": # Checks to see if the program is being run directly
 Actual Prompt
 ================
 
-Python code to {input_from_user}:
+Code to {input_from_user}:
 
 """
 
