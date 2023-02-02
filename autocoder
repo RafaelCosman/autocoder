@@ -3,7 +3,7 @@
 import sys
 import openai
 import subprocess
-from prompts import prompt
+from prompts import prompt, debugging_prompt
 
 ENGINE = 'text-davinci-003'
 MAX_TOKENS = 1500
@@ -19,19 +19,25 @@ def complete(prompt):
 
     return completion['choices'][0]['text']
 
+# ================
+# COMPLETION HANDLING FUNCTIONS
+# ================
+def handle_completion_as_file(completion):
+    # Get the file name
+    filename = completion.split('\n')[0]
+    filename = filename[2:]
 
-input_from_user = sys.argv[1]
+    # Get the contents
+    contents = completion[completion.find('\n')+1:]
 
-print(prompt(input_from_user))
+    # Write the file
+    with open(filename, 'w') as f:
+        f.write(contents)
 
-completion = complete(prompt(input_from_user)).strip()
+def handle_completion_as_command(completion):
+    # Get the file name
+    first_line = completion.split('\n')[0]
 
-print(completion)
-
-# Get the file name
-filename = completion.split('\n')[0]
-
-if filename == "```console": # This is if it is a console command rather than a file
     commands_to_run = completion.splitlines()[1:-1]
     commands_to_run_as_string = "\n".join(commands_to_run)
     input(f"autocoder would like to run the following commands. Press enter to continue. (to cancel, press control-c)\n\n\033[0;33m{commands_to_run_as_string}\033[0m")
@@ -50,12 +56,22 @@ if filename == "```console": # This is if it is a console command rather than a 
             print(f"I got the following error:\n\n{errs} \nLet me see if I can debug it...")
 
             # Make one attempt to debug the error
-else: # If it is an actual file
-    filename = filename[2:]
+            completion = complete(debugging_prompt(command, errs)).strip()
 
-    # Get the contents
-    contents = completion[completion.find('\n')+1:]
+            handle_completion_as_file(completion)
 
-    # Write the file
-    with open(filename, 'w') as f:
-        f.write(contents)
+def handle_completion_as_file_or_command(completion):
+    if completion.split('\n')[0] == "```console":
+        handle_completion_as_command(completion)
+    else:
+        handle_completion_as_file(completion)
+
+
+# Now we actually run stuff:
+input_from_user = sys.argv[1]
+print(prompt(input_from_user))
+
+completion = complete(prompt(input_from_user)).strip()
+print(completion)
+
+handle_completion_as_file_or_command(completion)
