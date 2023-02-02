@@ -19,7 +19,7 @@ def handle_completion_as_file(completion):
         f.write(contents)
 
     print(f"""\033[90m================\033[0m
-\033[1m{filename}\033[0m
+{filename}
 \033[90m================\033[0m
 {contents}""")
 
