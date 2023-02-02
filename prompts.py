@@ -82,12 +82,16 @@ Code to make me an example webpage:
 </html>
 """
 
-def prompt(goal):
-    return f"""You are an experienced programmer that can write safe, readable, and commented code in a variety of languages.
+HEADER = f"""You are an experienced programmer that can write safe, readable, and commented code in a variety of languages.
+You always aim to write code that will run correctly on the first try.
 
 You are working in a directory with the following contents:
 
 {all_files_appended}
+"""
+
+def prompt(goal):
+    return f"""{HEADER}
 
 Your goal now is to {goal}.
 Make sure to write safe, readable, and commented code in an appropriate language based on the goal.
@@ -102,11 +106,7 @@ Code to {goal}:
 """
 
 def debugging_prompt(command, error_message):
-    return f"""You are an experienced programmer that can write safe, readable, and commented code in a variety of languages.
-
-You are working in a directory with the following contents:
-
-{all_files_appended}
+    return f"""{HEADER}
 
 You recently ran {command} and got the following error message:
 
