@@ -113,6 +113,7 @@ You recently ran {command} and got the following error message:
 {error_message}
 
 Your goal is now to debug this error by modifying one of the files in the directory.
+For example, if the error was "Address already in use", you might change the port.
 
 {EXAMPLES}
 
