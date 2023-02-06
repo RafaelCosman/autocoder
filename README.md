@@ -2,6 +2,7 @@
 `autocoder` is a command-line tool for automatically writing code directly in your repo. After installing, navigate to your project folder and then run `autocoder "<instructions for what you want to do>"`
 
 For example:
+- `cd my-repo`
 - `autocoder "please write me a login page"`
 - `autocoder "write me a webserver to serve the login page"`
 - `autocoder "run the webserver"`
