@@ -10,6 +10,8 @@ For example:
 
 Autocoder will also automatically catch exceptions thrown by code it runs, and will attempt to fix bugs.
 
+**NOTE: Autocoder is a very much a prototype right now and has severe limitations.**
+
 ## Demo Video (60s)
 [![Demo Video](https://img.youtube.com/vi/LHN0sVsVulk/0.jpg)](https://www.youtube.com/watch?v=LHN0sVsVulk)
 
